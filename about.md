@@ -7,7 +7,7 @@ main_nav: true
 
 ![alt text]({{ site.baseurl }}/assets/profile-placeholder.gif "Profile Picture"){:.profile}
 
-♫ Just Two of Us ♫  link : https://www.youtube.com/watch?v=q2iACIF7Rtw
+♫ Just Two of Us ♫  link : https://www.youtube.com/watch?v=KYwA5k00p2I
 
 <!-- Centrarium is a custom theme for Jekyll, made by [Ben Centra][bencentra] for his own blog. He'd be humbled if you liked it enough to use it as well! Installation and configuration instructions can be found in the [GitHub repository](https://github.com/bencentra/centrarium).
 
