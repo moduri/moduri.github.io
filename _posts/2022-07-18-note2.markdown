@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Welcome to TIL"
+title:  "NOTE2"
 date:   2022-07-18
 categories: TIL
 tags:	TIL welcome
