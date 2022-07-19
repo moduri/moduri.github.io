@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Task_JS"
+date:   2022-07-19
+categories: JS
+---
+
 - <h1>What is JavaScript?</h1>
 
 1. <h3>JavaScript의 자료형과 JavaScript만의 특성은 무엇일까 ?</h3>
