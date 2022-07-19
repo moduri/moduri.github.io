@@ -1,3 +1,11 @@
+---
+layout: post
+title:  "map, forEach"
+date:   2022-07-19
+categories: JS
+---
+
+
 - <h3>forEach는 반복문과 비슷하고, map은 요소값을 다른 새로운 배열을 생성하기 위한 고차함수다. </h3> 
 
 <hr>
