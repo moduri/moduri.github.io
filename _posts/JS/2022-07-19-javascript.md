@@ -1,0 +1,396 @@
+- <h1>What is JavaScript?</h1>
+
+1. <h3>JavaScript의 자료형과 JavaScript만의 특성은 무엇일까 ?</h3>
+
+- <b>느슨한 타입(loosely typed)의 동적(dynamic) 언어</b>
+
+
+```javascript
+let words = 'javascript'
+console.log(words)
+words = 20
+console.log(words)
+words = '3020'
+console.log(words)
+```
+
+    javascript
+    20
+    3020
+
+
+자바스크립트는 변수 생성시 변수의 타입을 미리 선언하지 않아도 된다는 장점이 있지만, 반대로 말하면 같은 words임에도 타입이 맞지 않아 생각치 못한 애러가 발생할수 있다는 말이다.
+
+이를 보완하기 위해 TypeScript(정적타입)를 사용하기도 한다.
+
+- <b>JavaScript 형변환</b>
+
+자바스크립트는 타입이 매우 유연한 언어이기 때문에 자바스크립트 엔진이 필요에 따라 암시적변환을 혹은 개발자의 의도에 따라 명시적변환을 실행한다.
+
+- <b>== and ===</b>
+
+
+```javascript
+const a = 1
+const b = '1'
+console.log(a == b);
+console.log(a === b);
+
+console.log(NaN == NaN); 
+console.log(NaN === NaN);
+
+var c = [1,2,3]; 
+var d = [1,2,3]; 
+console.log(c == d);
+console.log(c === d);
+```
+
+    true
+    false
+    false
+    false
+    false
+    false
+
+
+==는 Equal Operator이고,  ===는 Strict Equal Operator, 좀더 엄격한 연산자이다.
+
+- <b>느슨한 타입(loosely typed)의 동적(dynamic) 언어의 문제점은 무엇이고 보완할 수 있는 방법에는 무엇이 있을지 생각해보세요.</b>
+
+변수에 예상치 못한 타입이 들어와 Type Error가 발생하는 경우가 생기 때문에, 변수의 타입을 신경써 줘야 한다.
+
+보완할수 있는 방법으로는 
+
+const나 Object.freeze( 객체 ) 를 사용해주면 된다.
+
+Object.freeze를 사용하게 되면 해당 객체의 수정이나 삭제가 불가능하게 된다.
+
+- <b>undefined와 null의 미세한 차이들을 비교해보세요.</b>
+
+undefined와 null 모두 값이 없음을 나타내지만 
+
+undefined 는 미리 선언된 전역변수(전역 객체의 프로퍼티)이며, null 은 선언,등록하여 사용하는 하는 키워드이다
+
+다시말해 undefined는 아무것도 없다는 뜻이고, null은 아무것도아닌게 담겨있다는 뜻이다
+
+
+```javascript
+console.log(undefined == null)
+console.log(undefined === null)
+
+console.log(typeof(null))
+```
+
+    true
+    false
+    object
+
+
+엄격한 연산자를 사용하면 undefined와 null은 같은것이 아니며, null은 객체형태이다.
+
+다시말해 나중에 뭔가를 대입할건데 아직 뭔가를 넣지는 않을때 null을 넣어주면 된다.
+
+2. <h3>JavaScript 객체와 불변성이란 ? </h3>
+
+- <b>기본형 데이터와 참조형 데이터</b>
+
+기본형: Number, String, Boolean, null, undefined, Symbol
+
+참조형: Object, Array, Function, Date, RegExp(정규식), Map, WeakMap, Set, WeakSet
+
+기본형 데이터는 값을 그대로 할당하는것을 말하고, 메모리 내에 고정된 크기로 저장되면서, 원시 데이터 값 자체를 보관, 불변적 기본적으로 데이터는 하나의 메모리를 사용한다.
+
+
+```javascript
+let one = 1
+let two = 'two'
+let three = null
+
+two = three
+console.log(two === three)
+three = 'three'
+console.log(two === three)
+```
+
+    true
+    false
+
+
+two와 three는 같은값이였지만, three을 따로 지정해주면 false가 나오게 된다.
+
+
+
+참조형은 기본형 데이터의 집합으로 값이 지정된 주소의 값을 할당한다.
+
+
+```javascript
+let obj = { book: 'For Programming', price: 19000}
+let obj2 = obj
+
+obj2.price = 15000
+console.log(obj2.price)
+console.log(obj.price)
+```
+
+    15000
+    15000
+
+
+obj2는 obj의 주소값을 가르키고 있기 때문에, ojb2의 값을 바꾼다는것은 ojb의 값을 바꾼다는 얘기이다.
+
+- <b>불변 객체를 만드는 방법</b>
+
+불변 객체를 만들기 위해서는 const나 Object.freeze( 객체 )를 사용해주면 된다.
+
+const에선 객체 재할당은 불가능하지만 객체의 속성은 변경 가능하고
+
+Object.freeze()의 같은경우에는 수정이나 삭제는 불가능하지만, 객체의 재할당은 가능하다.
+
+
+```javascript
+let bucket_obj = { mouse: 40000, keyboard: 120000}
+
+Object.freeze(bucket_obj)
+bucket_obj.mouse = 5000
+console.log(bucket_obj)
+    
+bucket_obj = { iphone: 1400000, macbook: 3500000}
+console.log(bucket_obj)
+```
+
+    { mouse: 40000, keyboard: 120000 }
+    { iphone: 1400000, macbook: 3500000 }
+
+
+bucket_obj에 마우스와 키보드를 넣었지만, 재할당 후에는 아이폰과 맥북이 들어간것을 확인 할 수 있다.
+
+- <b>얕은 복사와 깊은 복사</b>
+
+얕은 복사는 객체의 주소값만 가르켜주고, 깊은 복사는 그값을 정말 가져온것을 말한다.
+
+얕은 복사의 예시
+
+
+```javascript
+const my_price = { a:10000, b:20000 };
+const your_price = my_price
+
+your_price.a = 890000;
+
+console.log( your_price.a );
+    
+console.log(my_price)
+    
+console.log(your_price)
+```
+
+    890000
+    { a: 890000, b: 20000 }
+    { a: 890000, b: 20000 }
+
+
+your_price의 값을 바꿨는데도 my_price의 값까지 바뀐것을 볼 수 있다.
+
+
+```javascript
+const obj1 = { a:1, b:2 };
+const obj2 = { ...obj1 };
+
+obj2.a = 100000;
+
+console.log( obj1 === obj2 )
+console.log(obj2)
+console.log(obj1)
+console.log(obj2.a)
+```
+
+    false
+    { a: 100000, b: 2 }
+    { a: 1, b: 2 }
+    100000
+
+
+spread 연산자를 이용해서 깊은 복사를 하였고, ojb2의 값을 바꾼후에도 ojb1의 값은 바뀌지 않은것을 확인할 수 있다.
+
+3. <h3>호이스팅과 TDZ는 무엇일까 ?</h3>
+
+- <b>스코프, 호이스팅, TDZ</b>
+
+스코프
+
+let과 const는 블록 스코프이다. 록 스코프에서 선언된 변수는 블록 내에서만 유효하며 외부에서는 접근할 수 없다. 즉, 블록 스코프는 지역변수이다.
+
+전역스코프: 어디서든 참조 가능
+
+지역 스코프: 함수 자신과 하위 함수에서만 참조 가능
+
+호이스팅
+
+함수 안에 있는 선언들을 모두 끌어올려서 해당 함수 유효 범위의 최상단에 선언하는 것을 말한다.
+
+var 변수 선언과 함수선언문에서 호이스팅이 일어난다.
+
+let/const는 호이스팅은 되지만 TDZ에 의해 ReferenceError가 발생한다.
+
+TDZ (Temporal Dead Zone)
+
+스코프의 시작 지점부터 초기화 시작 지점까지의 구간
+
+var는 선언과 초기화를 동시에 하므로 undefined // var item;
+
+let은 선언과 초기화가 분리되어 참조 에러 (ReferenceError) // let item >> ReferenceError
+
+const는 선언과 초기화, 할당을 동시에 해야 에러가 안난다. // const item = iphone
+
+- <b>함수 선언문과 함수 표현식에서 호이스팅 방식의 차이</b>
+
+
+```javascript
+function sum(a,b) {
+    return a + b;
+}
+```
+
+함수 선언식
+
+
+```javascript
+const minus = function(a,b) {
+    return a - b;
+}
+```
+
+함수 표현식
+
+var count;    // undefined
+
+count( );      // error : count is not function
+
+var count = function( ) {
+    console.log('count는 1이다.');
+}
+
+error: count is not function이라는 애러가 나온다.
+
+count는 함수가 아니라는 말이다.
+
+var count;    //undefined
+
+var count = function() {
+    console.log('count는 1이다.');
+}
+
+count( ); // 정상작동
+
+count( )를 var count 아래에서 실행시켜줬기 때문에 정상작동한다.
+
+count();
+
+let count = function() {
+    console.log('count는 1이다.');
+} //Referecne Error
+
+let은 호이스팅의 영향을 받지 않으므로 작성한 코드의 위에서부터 그대로 실행된다. 그러므로 함수가 정의되기 전에 불르게 되면 애러가 발생한다.
+
+- <b>실행 컨텍스트와 콜 스택</b>
+
+컨텍스트: 실행할 코드에 제공할 환경 정보들을 모아놓은 객체로서, 동일한 스코프에 있는 코드들을 실행할 때 필요한 환경 정보를 모아 컨텍스트를 구성하고, 이를 호출 스택(콜 스택)에 쌓아서 실행 순서를 보장합니다.
+
+컨텍스트
+
+전역 컨텍스트: 특정 함수가 실행되지 않는 한 전역 컨텍스트에서 실행된다. 여기서 변수 객체를 생성하는 대신 this를 전역 객체(global object)를 활용한다.
+
+함수 컨텍스트: 함수가 실행될 때마다 실행 컨텍스트가 생성되고, 함수가 동작을 다하면 콜스택에서 삭제된다.
+
+콜 스텍
+
+콜 스텍은 실행 컨텍스트가 추가 또는 제거를 통해 코드의 실행 순서를 관리하는 스택 자료구조를 뜻한다.
+
+스택 자료구조이기 때문에, 가장 나중에 추가된 실행 컨텍스트(최상단 실행 컨텍스트)가 현재 실행되고 있는 실행 컨텍스트가 된다.
+
+소스코드의 실행이 모두 종료되면 최상단에 있던 실행 선텍스트는 콜 스택에서 pop되서 사라지게 된다.
+
+콜 스텍은 실행 컥테스트의 추가 및 제거를 통해 코드의 실행 순서를 관리하기 때문에, 실행 컨텍스트 스텍이라고도 불린다.
+
+- <b>스코프 체인, 변수 은닉화</b>
+
+스코프 체인
+
+스코프는 단방향으로 연결되는 체인을 형성하며, 이 스코프 체인을 통해 상위 스코프로 이동하면서 식별자를 검색한다.
+
+스코프는 함수의 중첩에 의해 계층적 구조를 가지게 된다. ⇒ 외부 함수(outer function) / 중첩 함수(nested function)
+
+변수를 참조할 때, 자바스크립트 엔진은 스코프 체인을 통해 변수를 참조하는 코드의 스코프에서 시작하여 상위 스코프로 이동하면서 선언된 변수를 검색하게 된다.
+
+여러 스코프에서 동일한 식별자를 선언한 경우, 무조건 스코프 체인 상에서 가장 먼저 검색된 식별자에만 접근 가능하다 ⇒ 변수 은닉화(variable shadowing)
+
+
+```javascript
+var test = 1;
+
+var a = function() {
+  var b = function() {
+    var c = function() {
+      console.log(test) // undefined 
+      var test = 3;
+    };
+    c();
+    console.log(test) // 5 // b 스코프 내부에는 test가 없으므로 가까운 a 스코프 값을 참고합니다.
+  };
+  var test = 5
+  b();
+  console.log(test) // 5 // a 스코프의 가장 가까운 스코프는 자기 자신인 5입니다.
+};
+a();
+console.log(test); // 1 // 전역 스코프에서 가장 가까운 스코프는 자기 자신인 1입니다.
+```
+
+    undefined
+    5
+    5
+    1
+
+
+스코프 
+
+전역 스코프: 전역은 코드의 가장 바깥 영역으로, 여기서 선언된 변수는 전역 변수가 된다. 전역 변수는 어디서든 참조가 가능하다
+
+
+지역 스코프: 지역은 함수 코드의 내부 영역으로, 여기서 선언된 변수는 지역 변수가 된다. 지역 변수는 자신의 지역 스코프 및 하위 지역 스코프에서 참조 가능
+
+지역 스코프는 함수에 의해서 생성되는가, 코드 블록에 의해서 생성되는가에 따라 레벨이 나뉜다.
+
+블록 레벨 스코프 : if, for, while, try/catch 등 코드 블록이 지역 스코프 생성 ⇒ let, const 키워드로 선언된 변수는 모든 코드 블록을 지역 스코프로 인정한다.
+
+함수 레벨 스코프 : 함수가 지역 스코프 생성 ⇒ var 키워드로 선언된 변수는 오직 '함수'만을 지역 스코프로 인정한다.
+
+- <b>실습 과제</b>
+
+
+```javascript
+let b = 1;
+function hi () {
+    const a = 1;
+    let b = 100;
+    b++; // b = 101
+    console.log(a,b); //a = 1, b = 101
+}
+//console.log(a); a는 함수a안에서만 사용할 수 있다.
+console.log(b); // 함수밖으로 나와 b는 다시 1을 가르키게 된다.
+hi() //1, 101
+console.log(b) // 1을 가르키게 된다.
+```
+
+    1
+    1 101
+    1
+
+
+함수 hi() 내부에서는 a = 1, b = 100을 가르키지만 
+
+함수 밖에서는 a는 SyntaxError: Unexpected identifier 애러가 나고 않고, b는 1을 가르키게 된다.
+
+
+```javascript
+
+```
