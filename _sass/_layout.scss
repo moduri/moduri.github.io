@@ -28,7 +28,7 @@ ul.default {
 }
 
 code {
-	background-color: #111111;
+	background-color: #eee;
 	display: inline-block;
 	border-radius: 3px;
 	padding: 0 3px;
@@ -57,7 +57,7 @@ pre code.hljs {
     position: relative;
     top: -9px;
     display: block;
-    background: #8c8888;
+    background: $white;
     width: 18px;
     height: 18px;
     margin-left: auto;
@@ -68,7 +68,7 @@ pre code.hljs {
     position: relative;
     top: -26px;
     display: block;
-    background: #8c8888;
+    background: $white;
 // 		$white
     width: 16px;
     height: 16px;
